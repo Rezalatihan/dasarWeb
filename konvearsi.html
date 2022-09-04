@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>konversi</title>
+  </head>
+  <body>
+    <script>
+      let data = prompt("maskan agka");
+      if (data >= 80 && data <= 100) {
+        data += alert("A");
+      } else if (data >= 60 && data < 80) {
+        data += alert("B");
+      } else if (data >= 40 && data < 60) {
+        data += alert("C");
+      } else if (data >= 20 && data < 40) {
+        data += alert("D");
+      } else if (data >= 0 && data < 20) {
+        data += alert("E");
+      } else if (data < 0) {
+        data += alert("Tidak Boleh Memasukan Angka Minus (-)");
+      } else {
+        data += alert("Anda Harus Memasukan Angka");
+      }
+    </script>
+  </body>
+</html>
