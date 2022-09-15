@@ -2,15 +2,24 @@ const berita = document.getElementById("cards")
 berita.innerHTML = message(
   `<div class="spinner-border text-dark mx-auto" role="status">
         <span class="visually-hidden">Loading...</span>`)
+const cari = document.getElementById('form')
+cari.innerHTML = `<input type="text" id="cek" class="form-control m-2" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" />`
 
-fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=879a5c8344cb4ee5b90ece64f360824f")
-  .then(response => response.json())
-  .then((data) => {
-    const isi = data.articles;
 
-    let img = [];
-    isi.map((el) => {
-      img += `
+const cekSearch = document.getElementById("cek")
+
+cekSearch.addEventListener("keyup", function () {
+  let input = cekSearch.value
+
+
+  fetch(`https://newsapi.org/v2/top-headlines?q=${input}&apiKey=879a5c8344cb4ee5b90ece64f360824f`)
+    .then(response => response.json())
+    .then((data) => {
+      const isi = data.articles;
+
+      let img = [];
+      isi.map((el) => {
+        img += `
       <div class="card">
         <img src=${el.urlToImage} class="images" alt="Image"/> 
         <h5 class="card-title">${el.title} <br>
@@ -19,17 +28,14 @@ fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=879a5c8344cb4ee5b9
         <p "card-text">${el.content}</p>
         <a href=" ${el.url} " class="btn btn-primary">Read more.....</a>
       </div>`
+      })
+      berita.innerHTML = img
+
+
     })
-    berita.innerHTML = img
 
-    // const inpt = document.getElementById('cek');
-    // const tmpl = berita;
-    // function cekData() {
-    //   tmpl.innerHTML = inpt.value
-    // }
-    // inpt.addEventListener('click', cekData)
-
-  }).catch(err => berita.innerHTML = err);
+})
+  .catch(err => berita.innerHTML = err);
 
 function message(msg) {
   return `<p> ${msg} </P>`
